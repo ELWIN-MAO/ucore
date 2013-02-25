@@ -1,0 +1,9 @@
+[submodule "kernel"]
+	path = kernel
+	url = https://github.com/chyyuu/ucore_plus.git
+[submodule "lib/bionic-libc"]
+	path = lib/bionic-libc
+	url = https://github.com/chyyuu/ucore_lib_bioniclibc.git
+[submodule "lib/uclibc"]
+	path = lib/uclibc
+	url = https://github.com/chyyuu/ucore_lib_uclibc.git
