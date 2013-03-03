@@ -45,6 +45,7 @@ define component_template =
   $(1): | $(root-fs-dir)
 	@make -C $(pwd)/$(1)
   $(1)-install: $(1)
+	@echo Install $(1) ...
 	@$(component-script) $(1) install
 
   component-targets += $(1) $(1)-install
@@ -53,6 +54,7 @@ define component_template =
   endif
 endef
 
+$(foreach comp,$(wildcard app/*),$(eval $(call component_template,$(comp))))
 $(foreach comp,$(wildcard lib/*),$(eval $(call component_template,$(comp))))
 
 $(kernel-build-dir)/mksfs: | $(kernel-config)
