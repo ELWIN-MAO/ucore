@@ -69,6 +69,7 @@ component() {
 			;;
 		    "n")
 			sed -i "/$config_line/d" $config_file
+			uninstall_component $1/rootfs $BUILD_DIR/rootfs
 			;;
 		    install)
 			install_component $1/rootfs $BUILD_DIR/rootfs
