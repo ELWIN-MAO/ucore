@@ -1,5 +1,7 @@
 #!/bin/bash
 
+_boardlist=`find kernel | grep "arch/.*/configs/.*_defconfig" | sed "s/.*arch\/\(.*\)\/configs\/\(.*\)_defconfig/\1-\2/g" | sed "s/-default//g" | paste -s -d ' '`
+
 board() {
     local id=$1
 
@@ -20,14 +22,13 @@ board() {
 }
 
 _board() {
-    local boardlist="i386 x86_64 arm-goldfishv7"
     local cur="${COMP_WORDS[COMP_CWORD]}"
     local prev="${COMP_WORDS[COMP_CWORD-1]}"
     COMPREPLY=()
 
     case "$prev" in
         board)
-            COMPREPLY=($(compgen -W "$boardlist" -- $cur))
+            COMPREPLY=($(compgen -W "$_boardlist" -- $cur))
             return 0
             ;;
         *)
