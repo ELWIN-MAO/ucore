@@ -1,6 +1,6 @@
 #!/bin/bash
 
-_boardlist=`find kernel | grep "arch/.*/configs/.*_defconfig" | sed "s/.*arch\/\(.*\)\/configs\/\(.*\)_defconfig/\1-\2/g" | sed "s/-default//g" | paste -s -d ' '`
+_boardlist=" `find kernel | grep "arch/.*/configs/.*_defconfig" | sed "s/.*arch\/\(.*\)\/configs\/\(.*\)_defconfig/\1-\2/g" | sed "s/-default//g" | paste -s -d ' '` "
 
 board() {
     local id=$1
@@ -9,6 +9,12 @@ board() {
 	echo arch: ${ARCH-"<not set>"}
 	echo board: ${BOARD-"<not set>"}
 	return 0
+    fi
+
+    if ! echo "$_boardlist" | grep " $id " > /dev/null; then
+	echo "Unknown board id: $id"
+	echo "Supported:$_boardlist"
+	return 1
     fi
 
     local arch=${id/-*/}
