@@ -10,6 +10,19 @@ build-dir := $(pwd)/out/build-$(ARCH)-$(BOARD)
 
 -include $(build-dir)/.component-config
 
+help:
+	@echo "===== uCore Toplevel Build Script ====="
+	@echo "current configuration:" $(ARCH)-$(BOARD)
+	@echo "* Build targets:"
+	@echo "    all       - Build everything required"
+	@echo "    kernel    - Build uCore kernel (and swap image if needed)"
+	@echo "    rootfs    - Build rootfs image"
+	@echo "* Execution targets:"
+	@echo "    run       - Start uCore using default simulator configurations"
+	@echo "* Cleanup targets:"
+	@echo "    clean     - Remove build of current configuration"
+	@echo "    clean-all - Remove builds of all configurations"
+
 all: rootfs kernel
 
 # Kernel
