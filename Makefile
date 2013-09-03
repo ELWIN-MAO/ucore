@@ -57,7 +57,7 @@ component-script := $(pwd)/scripts/component.sh
 define component_template =
   $(1): | $(root-fs-dir)
 	@$(component-script) $(1) build
-  $(1)-install: $(1)
+  $(1)-install: $(1) | $(root-fs-dir)
 	@echo Install $(1) ...
 	@$(component-script) $(1) install
 
@@ -107,6 +107,8 @@ clean:
 clean-all:
 	@rm -rf out
 	@rm -rf build
+	@mkdir -p $(build-dir)
+	@ln -sfn $(build-dir) build
 
 
 .PHONY: all help kernel-config kernel rootfs clean $(component-targets)

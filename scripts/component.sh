@@ -3,10 +3,12 @@
 # $1 - component dir
 # $2 - component config file
 check_component_enabled() {
-    if [ `grep "COMPONENT_${1/\//_}=y" $2` ]; then
-	printf "%-20s = yes\n" $1
-    else
-	printf "%-20s = no\n" $1
+    if bash $TOPLEVEL_DIR/scripts/info.sh $1 supported; then
+	if [ `grep "COMPONENT_${1/\//_}=y" $2` ]; then
+	    printf "%-20s = yes\n" $1
+	else
+	    printf "%-20s = no\n" $1
+	fi
     fi
 }
 
@@ -44,7 +46,7 @@ uninstall_component() {
     popd > /dev/null
 }
 
-component() {
+cmpt() {
     local cmd=$1
     local config_file=$BUILD_DIR/.component-config
     local config_line="COMPONENT_${1/\//_}=y"

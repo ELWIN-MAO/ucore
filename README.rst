@@ -64,15 +64,15 @@ Advanced Usage
 Building and Installing Components
 ----------------------------------
 
-The build system provides another command *component* for managing components. Its usage is listed as follows.
+The build system provides another command *cmpt* for managing components. Its usage is listed as follows.
 
-component
+cmpt
   List the status of all components (whether they will be built and installed or not).
 
-component <component-name>
+cmpt <component-name>
   Print the status of the given component. For a complete list of possible components, press *tab* after typing *component* (auto-completion again).
 
-component <component-name> [y|n]
+cmpt <component-name> [y|n]
   Set if the component referred to by <component-name> should be built and installed (y) or not (n).
 
 The component settings are saved per architecture. You do not need to set them again when you open a new terminal.
@@ -83,8 +83,8 @@ Examples
 To build uCore for ARM with bionic libc test cases included, use the following commands (assume all components are excluded right now)::
 
     ucore$ source scripts/envsetup.sh
-    ucore$ board arm
-    ucore$ component lib/bionic-libc y
+    ucore$ board arm-goldfishv7
+    ucore$ cmpt lib/bionic-libc y
     ucore$ make all
     ucore$ make run
 

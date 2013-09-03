@@ -24,7 +24,7 @@ board() {
     fi
     export ARCH=$arch BOARD=$board
     mkdir -p out/build-$ARCH-$BOARD
-    ln -sfn out/build-$ARCH-$BOARD build
+    ln -sfn out/build-$ARCH-$BOARD $TOPLEVEL_DIR/build
 }
 
 _board() {
