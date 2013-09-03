@@ -69,13 +69,13 @@ component() {
 			;;
 		    "n")
 			sed -i "/$config_line/d" $config_file
-			uninstall_component $1/rootfs $BUILD_DIR/rootfs
+			uninstall_component $BUILD_DIR/$1/rootfs $BUILD_DIR/rootfs
 			;;
 		    install)
-			install_component $1/rootfs $BUILD_DIR/rootfs
+			install_component $BUILD_DIR/$1/rootfs $BUILD_DIR/rootfs
 			;;
 		    uninstall)
-			uninstall_component $1/rootfs $BUILD_DIR/rootfs
+			uninstall_component $BUILD_DIR/$1/rootfs $BUILD_DIR/rootfs
 			;;
 		esac
 	    fi
