@@ -10,6 +10,11 @@ check_component_enabled() {
     fi
 }
 
+# $1 - component relative source directory
+build_component() {
+    make -C $TOPLEVEL_DIR/$1
+}
+
 # $1 - component locally installed dir
 # $2 - target directory
 install_component() {
@@ -71,11 +76,29 @@ component() {
 			sed -i "/$config_line/d" $config_file
 			uninstall_component $BUILD_DIR/$1/rootfs $BUILD_DIR/rootfs
 			;;
+		    build)
+			custom_script=$TOPLEVEL_DIR/scripts/glues/$1/build
+			if [ -f $custom_script ]; then
+			    bash $custom_script
+			else
+			    build_component $1
+			fi
+			;;
 		    install)
-			install_component $BUILD_DIR/$1/rootfs $BUILD_DIR/rootfs
+			custom_script=$TOPLEVEL_DIR/scripts/glues/$1/install
+			if [ -f $custom_script ]; then
+			    bash $custom_script
+			else
+			    install_component $BUILD_DIR/$1/rootfs $BUILD_DIR/rootfs
+			fi
 			;;
 		    uninstall)
-			uninstall_component $BUILD_DIR/$1/rootfs $BUILD_DIR/rootfs
+			custom_script=$TOPLEVEL_DIR/scripts/glues/$1/uninstall
+			if [ -f $custom_script ]; then
+			    bash $custom_script
+			else
+			    uninstall_component $BUILD_DIR/$1/rootfs $BUILD_DIR/rootfs
+			fi
 			;;
 		esac
 	    fi

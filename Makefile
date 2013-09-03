@@ -56,7 +56,7 @@ component-script := $(pwd)/scripts/component.sh
 
 define component_template =
   $(1): | $(root-fs-dir)
-	@make -C $(pwd)/$(1)
+	@$(component-script) $(1) build
   $(1)-install: $(1)
 	@echo Install $(1) ...
 	@$(component-script) $(1) install
